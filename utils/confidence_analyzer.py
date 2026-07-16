@@ -15,10 +15,20 @@ to nudge the candidate's awareness, not to be a hard judgment.
 """
 
 import re
+import os
 import cv2
 import numpy as np
 
-_FACE_CASCADE = cv2.CascadeClassifier(cv2.data.haarcascades + "haarcascade_frontalface_default.xml")
+# Robust cascade path lookup — works whether or not cv2.data is available
+try:
+    _cascade_path = cv2.data.haarcascades + "haarcascade_frontalface_default.xml"
+    if not os.path.exists(_cascade_path):
+        raise AttributeError
+except AttributeError:
+    _cv2_dir = os.path.dirname(cv2.__file__)
+    _cascade_path = os.path.join(_cv2_dir, "data", "haarcascade_frontalface_default.xml")
+
+_FACE_CASCADE = cv2.CascadeClassifier(_cascade_path)
 
 # Common English filler words/phrases (lowercase, word-boundary matched)
 FILLER_WORDS = [

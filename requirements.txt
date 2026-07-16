@@ -10,7 +10,7 @@ assemblyai
 pdfplumber
 streamlit-autorefresh>=1.0.1
 streamlit-webrtc>=0.45.0
-opencv-python-headless>=4.8.0
+opencv-python-headless==4.8.1.78
 pydub>=0.25.1
 av>=10.0.0
 #cd ai_interview_simulator
